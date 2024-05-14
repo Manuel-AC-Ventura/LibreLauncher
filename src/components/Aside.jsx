@@ -10,6 +10,12 @@ export const Aside = () => {
     { icon: <Settings size={20} />, label: "Configurações", path: "Settings"},
   ]
 
+  const social = [
+    { icon: <FaXTwitter size={16} />, label: "Twitter", path: "https://twitter.com/"},
+    { icon: <FaDiscord size={16} />, label: "Discord", path: "https://discord.com/"},
+    { icon: <FaGithub size={16} />, label: "Github", path: "https://github.com"},
+  ]
+
   return (
     <aside className="flex-[2] p-4 w-full min-h-screen space-y-12 border-r-2 border-neutral-800">
       <h1 className="text-xl font-black mt-3">
@@ -34,6 +40,18 @@ export const Aside = () => {
         />
       </div>
 
+      {
+        /*<ul className="flex items-center space-x-3">
+          <p className="text-sm">Acompanhe-nos</p>
+          {social.map((social, index)=>(
+            <li key={index}>
+              <a href={social.path}>
+                {social.icon}
+              </a>
+            </li>
+          ))}
+        </ul>*/
+      }
     </aside>
   )
 }

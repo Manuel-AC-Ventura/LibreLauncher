@@ -1,33 +1,39 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { open } from "@tauri-apps/api/dialog";
 import { Header } from '../components/Header.jsx';
 import { downloadDir } from '@tauri-apps/api/path';
+import { saveDownloadPath, getDownloadPath } from '../Config/db.jsx';
 
-export const Settings = ()=>{
+export const Settings = () => {
   const [downloadPath, setDownloadPath] = useState('');
 
   useEffect(() => {
     const setDefaultDownloadPath = async () => {
-      const defaultPath = await downloadDir();
-      setDownloadPath(defaultPath);
+      let path = await getDownloadPath();
+      if (!path) {
+        path = await downloadDir();
+        saveDownloadPath(path);
+      }
+      setDownloadPath(path);
     };
 
     setDefaultDownloadPath();
   }, []);
 
-  const selectDir = async ()=>{
+  const selectDir = async () => {
     const selected = await open({
       directory: true,
       multiple: false,
       defaultPath: downloadPath
-    })
+    });
 
-    if(selected){
+    if (selected) {
       setDownloadPath(selected);
+      saveDownloadPath(selected);
     }
-  }
-  
-  return(
+  };
+
+  return (
     <main className='flex-[11] bg-[#1b1b1b]'>
       <Header page="Settings" />
       
@@ -36,11 +42,13 @@ export const Settings = ()=>{
           <div className="space-x-3 space-y-2">
             <h2 className="px-3">Diretório dos Downloads</h2>
             <input 
-              value={downloadPath}
-              className="form-input bg-neutral-900 w-5/6 text-sm outline-none p-2 rounded-md border-2 border-neutral-700 focus:ring-0 focus:ring-offset-0 focus:outline-offset-0"
               readOnly
+              value={downloadPath}
+              onClick={selectDir}
+              className="form-input bg-neutral-900 w-5/6 text-sm outline-none p-2 rounded-md border-2 border-neutral-700 focus:ring-0"
             />
-            <button onClick={selectDir} className="py-2 px-4 rounded-lg border-2 border-neutral-700">Mudar</button>
+
+            <button className="py-2 px-4 rounded-lg border-2 border-neutral-700">Mudar</button>
           </div>
 
           <div className="px-4">
@@ -59,5 +67,5 @@ export const Settings = ()=>{
         </div>
       </div>
     </main>
-  )
-}
+  );
+};
