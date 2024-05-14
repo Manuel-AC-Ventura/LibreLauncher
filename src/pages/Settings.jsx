@@ -32,7 +32,7 @@ export const Settings = ()=>{
       <Header page="Settings" />
       
       <div className="p-6">
-        <div className="bg-neutral-800 p-4 space-y-5 mx-auto rounded-lg">
+        <div className="bg-neutral-800 p-4 space-y-5 mx-auto rounded-lg shadow-sm shadow-black">
           <div className="space-x-3 space-y-2">
             <h2 className="px-3">Diretório dos Downloads</h2>
             <input 
