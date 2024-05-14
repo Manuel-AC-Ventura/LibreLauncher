@@ -10,7 +10,7 @@ export const Settings = () => {
     const selected = await open({
       directory: true,
       multiple: false,
-      defaultPath: await appDataDir(),
+      defaultPath: await download_dir(),
     });
 
     if (selected) {
@@ -27,10 +27,9 @@ export const Settings = () => {
           <div className="space-x-3 space-y-2">
             <h2 className="px-3">Diretório dos Downloads</h2>
             <input 
-              readOnly
               value={directory}
-              placeholder="C:/Transferências"
               className="form-input bg-neutral-900 w-5/6 text-sm outline-none p-2 rounded-md border-2 border-neutral-700 focus:ring-0 focus:ring-offset-0 focus:outline-offset-0"
+              readOnly
             />
             <button onClick={selectDirectory} className="py-2 px-4 rounded-lg border-2 border-neutral-700">Mudar</button>
           </div>
