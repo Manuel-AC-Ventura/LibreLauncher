@@ -11,7 +11,7 @@ export const Container = () => {
         <div className="w-full h-64 bg-[url('fallout4.png')] bg-cover rounded-lg" ></div>
       </div>
 
-      <div>
+      <div className="flex items-center justify-between">
         <div className="flex gap-3">
           <span 
             onClick={() => setActiveOption("Populares")} 
@@ -25,7 +25,13 @@ export const Container = () => {
           >
             Novidades
           </span>
-        </div>  
+        </div>
+
+        <div>
+          <span className="py-3 px-4 rounded-md cursor-pointer border-2 border-neutral-800 hover:border-neutral-700">
+            <span className="animate-pulse">✨</span> Me surpeenda
+          </span>
+        </div>
       </div>
 
       <div>
