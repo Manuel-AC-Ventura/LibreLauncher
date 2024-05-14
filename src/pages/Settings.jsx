@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { open } from "@tauri-apps/api/dialog";
 import { Header } from '../components/Header.jsx';
-import { appDataDir, downloadDir } from '@tauri-apps/api/path';
+import { downloadDir } from '@tauri-apps/api/path';
 
 export const Settings = ()=>{
   const [downloadPath, setDownloadPath] = useState('');
