@@ -1,4 +1,5 @@
 import { Home } from "./pages/Home"
+import { Catalog } from "./pages/Catalog"
 import { Aside } from "./components/Aside"
 import { Settings } from "./pages/Settings"
 import { NotFound } from "./pages/NotFound"
@@ -11,8 +12,9 @@ export const Router = ()=>{
       <Aside />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/Settings" element={<Settings />} />
+        <Route path="/Catalog" element={<Catalog />} />
         <Route path="/Downloads" element={<Downloads />} />
+        <Route path="/Settings" element={<Settings />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
