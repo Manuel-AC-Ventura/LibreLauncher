@@ -1,37 +1,46 @@
-import React, { useState } from 'react';
-import { open } from '@tauri-apps/api/dialog';
-import { appDataDir } from '@tauri-apps/api/path';
-import { Header } from "../components/Header";
+import { useState, useEffect } from 'react';
+import { open } from "@tauri-apps/api/dialog";
+import { Header } from '../components/Header.jsx';
+import { appDataDir, downloadDir } from '@tauri-apps/api/path';
 
-export const Settings = () => {
-  const [directory, setDirectory] = useState('');
+export const Settings = ()=>{
+  const [downloadPath, setDownloadPath] = useState('');
 
-  const selectDirectory = async () => {
+  useEffect(() => {
+    const setDefaultDownloadPath = async () => {
+      const defaultPath = await downloadDir();
+      setDownloadPath(defaultPath);
+    };
+
+    setDefaultDownloadPath();
+  }, []);
+
+  const selectDir = async ()=>{
     const selected = await open({
       directory: true,
       multiple: false,
-      defaultPath: await download_dir(),
-    });
+      defaultPath: downloadPath
+    })
 
-    if (selected) {
-      setDirectory(selected);
+    if(selected){
+      setDownloadPath(selected);
     }
-  };
-
-  return (
-    <main className='bg-[#1b1b1b] flex-[11]'>
+  }
+  
+  return(
+    <main className='flex-[11] bg-[#1b1b1b]'>
       <Header page="Settings" />
-
+      
       <div className="p-6">
         <div className="bg-neutral-800 p-4 space-y-5 mx-auto rounded-lg">
           <div className="space-x-3 space-y-2">
             <h2 className="px-3">Diretório dos Downloads</h2>
             <input 
-              value={directory}
+              value={downloadPath}
               className="form-input bg-neutral-900 w-5/6 text-sm outline-none p-2 rounded-md border-2 border-neutral-700 focus:ring-0 focus:ring-offset-0 focus:outline-offset-0"
               readOnly
             />
-            <button onClick={selectDirectory} className="py-2 px-4 rounded-lg border-2 border-neutral-700">Mudar</button>
+            <button onClick={selectDir} className="py-2 px-4 rounded-lg border-2 border-neutral-700">Mudar</button>
           </div>
 
           <div className="px-4">
