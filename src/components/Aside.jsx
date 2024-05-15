@@ -1,13 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FaXTwitter, FaDiscord, FaGithub } from "react-icons/fa6"
 import { Home, LayoutGrid, Download, Settings } from "lucide-react"
 
 export const Aside = () => {
+  const location = useLocation();
   const menu = [
     { icon: <Home size={20} />, label: "Home", path: "/"},
-    { icon: <LayoutGrid size={20} />, label: "Catálogo", path: "Catalog"},
-    { icon: <Download size={20} />, label: "Downloads", path: "Downloads"},
-    { icon: <Settings size={20} />, label: "Configurações", path: "Settings"},
+    { icon: <LayoutGrid size={20} />, label: "Catálogo", path: "/Catalog"},
+    { icon: <Download size={20} />, label: "Downloads", path: "/Downloads"},
+    { icon: <Settings size={20} />, label: "Configurações", path: "/Settings"},
   ]
 
   const social = [
@@ -24,7 +25,7 @@ export const Aside = () => {
 
       <ul className="space-y-4">
         {menu.map((item, index) => (
-          <li key={index} className="flex items-center gap-2 cursor-pointer">
+          <li key={index} className={`flex items-center gap-2 cursor-pointer transition-all ${location.pathname === item.path ? 'font-semibold' : ''}`}>
             {item.icon}
             <Link to={item.path}>{item.label}</Link>
           </li>
