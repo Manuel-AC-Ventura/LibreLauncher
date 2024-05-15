@@ -28,7 +28,7 @@ export const Container = () => {
         </div>
 
         <div>
-          <span className="py-3 px-4 rounded-md cursor-pointer border-2 border-neutral-800 hover:border-neutral-700">
+          <span className="py-3 px-4 rounded-md cursor-pointer border-2 transition-all border-neutral-800 hover:bg-zinc-800 hover:border-neutral-700">
             <span className="animate-pulse">✨</span> Me surpeenda
           </span>
         </div>
