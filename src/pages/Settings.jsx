@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { open } from "@tauri-apps/api/dialog";
 import { Header } from '../components/Header.jsx';
 import { downloadDir } from '@tauri-apps/api/path';
-import { useLocalForage } from '../hooks/useLocalForage'; // Importe o hook
+import { useLocalForage } from '../hooks/useLocalForage';
 
 export const Settings = () => {
   const [downloadPath, setDownloadPath] = useLocalForage('downloadPath', '');
