@@ -15,13 +15,13 @@ export const Container = () => {
         <div className="flex gap-3">
           <span 
             onClick={() => setActiveOption("Populares")} 
-            className={`py-2 px-4 rounded-md border-2 cursor-pointer ${activeOption === "Populares" ? 'bg-zinc-300 text-black border-zinc-300' : 'border-neutral-800'}`}
+            className={`py-2 px-4 rounded-md border-2 cursor-pointer transition-all ${activeOption === "Populares" ? 'bg-zinc-300 text-black border-zinc-300' : 'border-neutral-800 hover:bg-zinc-800'}`}
           >
             Populares
           </span>
           <span 
             onClick={() => setActiveOption("Novidades")} 
-            className={`py-2 px-4 rounded-md border-2 cursor-pointer ${activeOption === "Novidades" ? 'bg-zinc-300 text-black border-zinc-300' : 'border-neutral-800'}`}
+            className={`py-2 px-4 rounded-md border-2 cursor-pointer transition-all ${activeOption === "Novidades" ? 'bg-zinc-300 text-black border-zinc-300' : 'border-neutral-800 hover:bg-zinc-800'}`}
           >
             Novidades
           </span>

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { FaMagnifyingGlass } from "react-icons/fa6";
 
@@ -5,7 +6,7 @@ export const Header = ({ page }) => {
   return (
     <header className='w-full flex items-center justify-between p-6 bg-neutral-900 border-b-2 border-neutral-800'>
       <h1 className="flex space-x-2 text-xl font-black">
-        <ArrowLeft />
+        <Link to="/"><ArrowLeft className='cursor-pointer' /></Link>
         <span>{page}</span>
       </h1>
 
