@@ -25,7 +25,7 @@ export const Aside = () => {
 
       <ul className="space-y-4">
         {menu.map((item, index) => (
-          <li key={index} className={`flex items-center gap-2 cursor-pointer transition-all ${location.pathname === item.path ? 'font-semibold' : ''}`}>
+          <li key={index} className={`flex items-cente gap-2 cursor-pointer transition-all ${location.pathname === item.path ? 'font-bold' : ''}`}>
             {item.icon}
             <Link to={item.path}>{item.label}</Link>
           </li>
