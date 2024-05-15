@@ -1,24 +1,25 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { open } from "@tauri-apps/api/dialog";
 import { Header } from '../components/Header.jsx';
 import { downloadDir } from '@tauri-apps/api/path';
-import { saveDownloadPath, getDownloadPath } from '../Config/db.jsx';
+import { useLocalForage } from '../hooks/useLocalForage'; // Importe o hook
 
 export const Settings = () => {
-  const [downloadPath, setDownloadPath] = useState('');
+  const [downloadPath, setDownloadPath] = useLocalForage('downloadPath', '');
+  const [downloadCompleteNotification, setDownloadCompleteNotification] = useLocalForage('downloadCompleteNotification', false);
+  const [repackUpdatedNotification, setRepackUpdatedNotification] = useLocalForage('repackUpdatedNotification', false);
 
   useEffect(() => {
     const setDefaultDownloadPath = async () => {
-      let path = await getDownloadPath();
+      let path = downloadPath;
       if (!path) {
         path = await downloadDir();
-        saveDownloadPath(path);
+        setDownloadPath(path);
       }
-      setDownloadPath(path);
     };
 
     setDefaultDownloadPath();
-  }, []);
+  }, [downloadPath, setDownloadPath]);
 
   const selectDir = async () => {
     const selected = await open({
@@ -29,7 +30,6 @@ export const Settings = () => {
 
     if (selected) {
       setDownloadPath(selected);
-      saveDownloadPath(selected);
     }
   };
 
@@ -55,11 +55,23 @@ export const Settings = () => {
             <h2 className="mb-4">Notificações</h2>
             <div className="space-y-2">
               <div className="space-x-2">
-                <input type="checkbox" name="" id="concludDownload" className="form-checkbox bg-neutral-900 checked:bg-black p-2 rounded focus:ring-0 focus:ring-offset-0 focus:outline-none" />
+                <input 
+                  type="checkbox" 
+                  id="concludDownload" 
+                  className="form-checkbox bg-neutral-900 checked:bg-black p-2 rounded focus:ring-0 focus:ring-offset-0 focus:outline-none"
+                  checked={downloadCompleteNotification}
+                  onChange={(e) => setDownloadCompleteNotification(e.target.checked)}
+                />
                 <label className='cursor-pointer' htmlFor="concludDownload">Quando um download for concluído</label>
               </div>
               <div className="space-x-2">
-                <input type="checkbox" name="" id="updateRepack" className="form-checkbox bg-neutral-900 checked:bg-black p-2 rounded focus:ring-0 focus:ring-offset-0 focus:outline-none" />
+                <input 
+                  type="checkbox" 
+                  id="updateRepack" 
+                  className="form-checkbox bg-neutral-900 checked:bg-black p-2 rounded focus:ring-0 focus:ring-offset-0 focus:outline-none"
+                  checked={repackUpdatedNotification}
+                  onChange={(e) => setRepackUpdatedNotification(e.target.checked)}
+                />
                 <label className='cursor-pointer' htmlFor="updateRepack">Quando a lista de repacks for atualizada</label>
               </div>
             </div>
