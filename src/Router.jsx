@@ -5,20 +5,20 @@ import { Aside } from "./components/Aside"
 import { Settings } from "./pages/Settings"
 import { NotFound } from "./pages/NotFound"
 import { Downloads } from "./pages/Downloads"
-import { HashRouter, Routes, Route } from "react-router-dom" 
+import { HashRouter, Routes, Route } from "react-router-dom";
 
-export const Router = ()=>{
-  return(
+export const Router = () => {
+  return (
     <HashRouter>
       <Aside />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/Search/:name" element={<Search />} />
-        <Route path="/Catalog" element={<Catalog />} />
-        <Route path="/Downloads" element={<Downloads />} />
-        <Route path="/Settings" element={<Settings />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="/" Component={Home} />
+        <Route path="/Search/:name" Component={Search} />
+        <Route path="/Catalog" Component={Catalog} />
+        <Route path="/Downloads" Component={Downloads} />
+        <Route path="/Settings" Component={Settings} />
+        <Route path="*" Component={NotFound} />
       </Routes>
     </HashRouter>
-  )
+  );
 }

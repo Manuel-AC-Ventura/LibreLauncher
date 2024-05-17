@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from 'react';
 
 export const Container = () => {
+  const [games, setGames] = useState([]);
   const [activeOption, setActiveOption] = useState("Populares");
+
+  
+
 
   return (
     <div className="w-full p-6 space-y-8">
@@ -37,6 +41,8 @@ export const Container = () => {
       <div>
         <h2 className="text-2xl font-black">{activeOption}</h2>
       </div>
+
+      
     </div>
   )
 }
