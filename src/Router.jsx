@@ -1,4 +1,5 @@
 import { Home } from "./pages/Home"
+import { Game } from "./pages/Game"
 import { Search } from "./pages/Search"
 import { Catalog } from "./pages/Catalog"
 import { Aside } from "./components/Aside"
@@ -14,6 +15,7 @@ export const Router = () => {
       <Routes>
         <Route path="/" Component={Home} />
         <Route path="/Search/:name" Component={Search} />
+        <Route path="/Game/:id" Component={Game} />
         <Route path="/Catalog" Component={Catalog} />
         <Route path="/Downloads" Component={Downloads} />
         <Route path="/Settings" Component={Settings} />
