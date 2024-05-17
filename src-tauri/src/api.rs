@@ -9,7 +9,7 @@ use serde_json::Value;
 pub struct Game {
     id: u32,
     name: String,
-    background_image: String
+    background_image: String,
 }
 
 #[tauri::command]
@@ -18,7 +18,7 @@ where
     Result<Vec<Game>, String>: Serialize,
 {
     dotenv().ok();
-    let api_key = env::var("STEAMGRIDDB_API_KEY").expect("STEAMGRIDDB_API_KEY must be set");
+    let api_key = env::var("RAWG_API_KEY").expect("RAWG_API_KEY must be set");
     let url = format!("https://api.rawg.io/api/games?key={}", api_key);
 
     let response = reqwest::get(&url)
