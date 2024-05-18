@@ -13,7 +13,7 @@ export const Router = () => {
     <HashRouter>
       <Aside />
       <Routes>
-        <Route path="/" Component={Home} />
+      <Route path="/" Component={Home} />
         <Route path="/Search/:name" Component={Search} />
         <Route path="/Game/:id" Component={Game} />
         <Route path="/Catalog" Component={Catalog} />

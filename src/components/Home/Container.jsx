@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom"
-import { FaSteam } from "react-icons/fa6"
+import { Link } from "react-router-dom";
+import { FaSteam } from "react-icons/fa6";
 import { useEffect, useState } from 'react';
 import { invoke } from "@tauri-apps/api/tauri";
 
@@ -7,15 +7,25 @@ export const Container = () => {
   const [games, setGames] = useState([]);
   const [activeOption, setActiveOption] = useState("Populares");
 
-  useEffect(()=>{
-    const fetchGames = async ()=>{
-      const gamesList = await invoke("fetch_games");
-      setGames(gamesList);
-    }
-    fetchGames();
-  }, [])
+  useEffect(() => {
+    const fetchGames = async () => {
+      try {
+        const cachedGames = localStorage.getItem("cachedGames");
+        if (cachedGames) {
+          setGames(JSON.parse(cachedGames));
+        }
+        const gamesList = await invoke("fetch_games");
+        
+        localStorage.setItem("cachedGames", JSON.stringify(gamesList));
+        
+        setGames(gamesList);
+      } catch (error) {
+        console.error("Failed to fetch or cache game data:", error);
+      }
+    };
 
-  console.log(games)
+    fetchGames();
+  }, []);
 
   return (
     <div className="w-full overflow-y-auto flex-grow p-6 space-y-8">
@@ -52,7 +62,7 @@ export const Container = () => {
       <div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {games.map((game, index)=>(
-            <Link className={`w-full h-44 cursor-pointer bg-cover rounded-lg backdrop-filter backdrop-blur-xl`} style={{backgroundImage: `url(${game.background_image})`}}>
+            <Link key={game.id} to={`Game/${game.id}`} className={`w-full h-44 cursor-pointer bg-cover rounded-lg backdrop-filter backdrop-blur-xl`} style={{backgroundImage: `url(${game.background_image})`}}>
               <div className="flex space-x-2 items-end w-full h-full bg-black/40 rounded-lg px-5 py-3">
                 <div className="flex space-x-2 items-center text-gray-200">
                   <FaSteam />

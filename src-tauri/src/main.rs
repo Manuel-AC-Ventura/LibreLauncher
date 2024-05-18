@@ -1,18 +1,13 @@
-// Prevents additional console window on Windows in release, DO NOT REMOVE!!
-#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+use std::env;
+use dotenv::dotenv;
 
+mod fetch_games;
+mod fetch_game_by_id;
 
-// Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-#[tauri::command]
-fn greet(name: &str) -> String {
-    format!("Hello, {}! You've been greeted from Rust!", name)
-}
-
-mod api;
 fn main() {
+    dotenv().ok();
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![greet])
-        .invoke_handler(tauri::generate_handler![api::fetch_games])
+        .invoke_handler(tauri::generate_handler![fetch_game_by_id::fetch_game_by_id, fetch_games::fetch_games])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

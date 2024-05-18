@@ -1,9 +1,8 @@
-use std::env;
-use dotenv::dotenv;
 use reqwest;
 use serde::Serialize;
 use serde::Deserialize;
 use serde_json::Value;
+use std::env;
 
 #[derive(Deserialize, Serialize)]
 pub struct Game {
@@ -17,7 +16,6 @@ pub async fn fetch_games() -> Result<Vec<Game>, String>
 where
     Result<Vec<Game>, String>: Serialize,
 {
-    dotenv().ok();
     let api_key = env::var("RAWG_API_KEY").expect("RAWG_API_KEY must be set");
     let url = format!("https://api.rawg.io/api/games?key={}", api_key);
 
